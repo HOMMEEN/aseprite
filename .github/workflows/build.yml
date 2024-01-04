@@ -6,11 +6,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
-        build_type: [RelWithDebInfo, Debug]
-        enable_ui: [off]
+        os: [windows-latest]
+        build_type: [Release]
+        enable_ui: [on]
         include:
-          - os: ubuntu-latest
+          - os: windows-latest
             build_type: Debug
             enable_ui: on
     steps:
@@ -55,6 +55,12 @@ jobs:
       shell: bash
       run: |
         cd build && ninja
+    - uses: actions/upload-artifact@v3
+      with:
+        name: aseprite
+        path: |
+          D:/a/aseprite/aseprite/build/bin/data
+          D:/a/aseprite/aseprite/build/bin/aseprite.exe
     # - name: Running C++ Tests
     #   shell: bash
     #   run: |
